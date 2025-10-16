@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TQAN — Plan de test (réserves interactives)</title>
+  <link rel="stylesheet" href="./plan.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo-dot"></div>
+        <strong>TQAN — Plan de test</strong>
+      </div>
+      <nav class="actions">
+        <a class="btn" href="./index.html">← Accueil</a>
+        <label class="btn btn-outline">
+          Importer un plan
+          <input type="file" id="planUpload" accept="image/*" hidden>
+        </label>
+        <button class="btn btn-outline" id="reset">Réinitialiser</button>
+        <button class="btn" id="exportJson">Exporter JSON</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="plan-area">
+      <div class="plan-wrap" id="planWrap">
+        <img id="planImg" src="./assets/plan-sample.jpg" alt="Plan d'étage" />
+        <div id="markers"></div>
+      </div>
+      <p class="hint">Astuce : cliquez sur le plan pour créer une réserve. Les données sont enregistrées dans votre navigateur (localStorage).</p>
+    </section>
+
+    <aside class="panel">
+      <h2>Réserves</h2>
+      <div class="filters">
+        <select id="filterStatus">
+          <option value="">Tous les statuts</option>
+          <option value="ouverte">Ouverte</option>
+          <option value="en_cours">En cours</option>
+          <option value="levee">Levée</option>
+        </select>
+        <input id="search" placeholder="Rechercher... (texte, pièce)" />
+      </div>
+      <div id="list" class="list"></div>
+    </aside>
+  </main>
+
+  <!-- Modal -->
+  <dialog id="modal">
+    <form method="dialog" class="modal-card" id="modalForm">
+      <h3>Nouvelle réserve</h3>
+      <div class="grid">
+        <label>Pièce/zone
+          <input name="room" placeholder="Ex: Chambre 2" required>
+        </label>
+        <label>Lot
+          <select name="lot">
+            <option value="Finition">Finition</option>
+            <option value="Electricité">Electricité</option>
+            <option value="Menuiserie">Menuiserie</option>
+            <option value="Plomberie">Plomberie</option>
+          </select>
+        </label>
+        <label>Statut
+          <select name="status">
+            <option value="ouverte" selected>Ouverte</option>
+            <option value="en_cours">En cours</option>
+            <option value="levee">Levée</option>
+          </select>
+        </label>
+        <label>Priorité
+          <select name="priority">
+            <option>Haute</option>
+            <option>Moyenne</option>
+            <option>Basse</option>
+          </select>
+        </label>
+      </div>
+      <label>Description
+        <textarea name="desc" rows="3" placeholder="Ex: Fissure au-dessus de la porte."></textarea>
+      </label>
+      <label>Photo (optionnel)
+        <input type="file" name="photo" accept="image/*">
+      </label>
+      <menu class="modal-actions">
+        <button value="cancel" class="btn btn-outline">Annuler</button>
+        <button id="saveBtn" class="btn">Enregistrer</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="./plan.js"></script>
+</body>
+</html>
